@@ -48,7 +48,7 @@ class TicTacToe():
     def play_game(self):
         while TicTacToe.current_state == TicTacToe.game_state.RUNNING:
             self.display_board()
-            #self.make_move()
+            self.make_move()
         if TicTacToe.current_state == TicTacToe.game_state.OVER:
             self.display_game_over()
 
@@ -63,11 +63,26 @@ class TicTacToe():
             self.board[2][2].draw_space()))
         print(" ___|____|___ ")
 
-    #def make_move(self):
+    def make_move(self):
+        print("Player " + str(self.get_player()) + " choose a pos: ")
+        spot = input()
+        i = 0
+        while i < self.cols:
+            j = 0
+            while j < self.rows:
+                if str(self.board[i][j].state) == "-1" and str(self.board[i][j].pos) == spot:
+                    self.board[i][j].state = str(self.total_turns % 2)
+                    self.total_turns += 1
+                j += 1
+            i += 1
+
+    # def display_game_over(self):
 
 
-    #def display_game_over(self):
-
+    def get_player(self):
+        if self.total_turns % 2 == 0:
+            return 'O'
+        return 'X'
 
 game_play = TicTacToe()
 game_play.setup()
